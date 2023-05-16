@@ -1,4 +1,4 @@
-# pipHack
+# pip-RCE
 POC of RCE through unsafe pip package
 
 ## Usage
